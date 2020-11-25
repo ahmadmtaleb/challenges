@@ -95,6 +95,7 @@ function MatrixChallenge(strArr){
                     }
                 }
             }
+            // for the diagonal words combination 
             if(i < lenMatrixArr/2 && j < lenMatrixArr/2){
                 for(let v = 0; v < lenMatrixArr; v++){ // for going back and forth on the same column 
                     if(i+v >= 0 && i+v < lenMatrixArr && j+v >= 0 && j+v < lenMatrixArr){
@@ -109,13 +110,21 @@ function MatrixChallenge(strArr){
             else {
                 // horizontal words from right to left 
                 for(let v = 0; v < lenMatrixArr; v++){ // for going back and forth on the same line 
-                    if(i-v >= 0 && i-v < lenMatrixArr && j-v >= 0 && j-v < lenMatrixArr){
+                    if(i-v >= 0 && j-v >= 0){
                         oneDiagonalWord += matrixArr[i-v][j-v];
                         if(oneDiagonalWord.length >= 3){
                             diagonalCombination.push(oneDiagonalWord)
                         }
                         else continue;
                     }
+                    else if(i+v > 0 && i+v < lenMatrixArr && j-v >= 0){
+                        oneDiagonalWord += matrixArr[i+v][j-v];
+                        if(oneDiagonalWord.length >= 3){
+                            diagonalCombination.push(oneDiagonalWord)
+                        }
+                        else continue;
+                    }
+                    else continue;
                 }
             }
             
@@ -126,77 +135,22 @@ function MatrixChallenge(strArr){
     // console.log('Horizontal Combination', horizontalCombination)
     // console.log('Vertical Combination',  verticalCombination)
     // console.log('Diagonal Combination', diagonalCombination)
+    // console.log('Possible combination', possibleWordsCombination.length)
     // console.log('Possible combination', possibleWordsCombination)
     // console.log(matrixArr)
-    // console.log(matrixArr[2].indexOf('b'))
 
-    let wordsArr = strArr[1].split(',')
-    let wordsNotMatched = [];
-    wordsArr.forEach(value => {
+    let wordsArr = strArr[1].split(',');
+    let notMatchedArr = [];
+    wordsArr.forEach((value, index) => {
         if(!possibleWordsCombination.includes(value)){
-            wordsNotMatched.push(value)
+            notMatchedArr.push(value)
         }
-        else {
-            returnStr = 'true'
-        }
-    })
-    console.log(wordsArr);
-    returnStr = 'true';
-    return returnStr;
+    });
+    returnStr = notMatchedArr.join();
+    if (returnStr){
+        return returnStr;
+    }
+    return 'true';
 }
-MatrixChallenge(['rbfg, ukop, fgub, mnry', 'bog,bop,gup,fur,ruk']);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Solution in python 
-grid = "fxie amlo ewbx astu".split()
-nrows, ncols = len(grid), len(grid[0])
-
-# A dictionary word that could be a solution must use only the grid's
-# letters and have length >= 3. (With a case-insensitive match.)
-import re
-alphabet = ''.join(set(''.join(grid)))
-bogglable = re.compile('[' + alphabet + ']{3,}$', re.I).match
-
-words = set(word.rstrip('\n') for word in open('words') if bogglable(word))
-prefixes = set(word[:i] for word in words
-               for i in range(2, len(word)+1))
-
-def solve():
-    for y, row in enumerate(grid):
-        for x, letter in enumerate(row):
-            for result in extending(letter, ((x, y),)):
-                yield result
-
-def extending(prefix, path):
-    if prefix in words:
-        yield (prefix, path)
-    for (nx, ny) in neighbors(path[-1]):
-        if (nx, ny) not in path:
-            prefix1 = prefix + grid[ny][nx]
-            if prefix1 in prefixes:
-                for result in extending(prefix1, path + ((nx, ny),)):
-                    yield result
-
-def neighbors((x, y)):
-    for nx in range(max(0, x-1), min(x+2, ncols)):
-        for ny in range(max(0, y-1), min(y+2, nrows)):
-            yield (nx, ny)
-*/
+console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'bog,bop,gup,fur,ruk']));
+// console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'rbfg,ukop,fgub,mnry']));

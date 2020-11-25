@@ -386,7 +386,7 @@ Searching and sorting methods are for locating elements within an array and for 
 ### JSON.stringify 
 - serialize the array if you want to save the contents of an array in textual form for later reuse 
 ### join()
-- The join() method converts all the elements of an array to strings and concatenates them, returning the resulting string
+- The join() method converts all the elements of an array to strings and concatenates them, **returning** the resulting string
 - You can specify an optional string that separates the elements in the resulting string.
 - If no separator string is specified, a comma is used
 - The join() method is the inverse of the String.split() method, which creates an array by breaking a string into pieces.
