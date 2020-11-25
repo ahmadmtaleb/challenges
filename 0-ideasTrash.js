@@ -99,3 +99,33 @@ def neighbors((x, y)):
         for ny in range(max(0, y-1), min(y+2, nrows)):
             yield (nx, ny)
 */
+
+
+
+
+
+
+// Challenge 1 - Letter Capitalize
+
+//     Take the str parameter being passed and capitalize the first letter of each word. Words will be separated by only one space.
+
+// Challenge 2 - Time Convert
+
+//     Take the num parameter being passed and return the number of hours and minutes the parameter converts to (ie. if num = 63 then the output should be 1:3). Separate the number of hours and minutes with a colon.
+
+// Challenge 3 - Longest Word
+
+//     Take the sen parameter being passed and return the largest word in the string. If there are two or more words that are the same length, return the first word from the string with that length. Ignore punctuation and assume sen will not be empty.
+
+// Challenge 4 - Letter Changes
+
+//     Link: https://www.coderbyte.com/information/Letter%20Changes
+//     Take the str parameter being passed and modify it using the following algorithm. Replace every letter in the string with the letter following it in the alphabet (ie. c becomes d, z becomes a). Then capitalize every vowel in this new string (a, e, i, o, u) and finally return this modified string.
+
+// Challenge 5 - Closest Enemy
+
+//     Read the matrix of numbers stored in strArr which will be a 2D matrix that contains only the integers 1, 0, or 2. Then from the position in the matrix where a 1 is, return the number of spaces either left, right, down, or up you must move to reach an enemy which is represented by a 2. You are able to wrap around one side of the matrix to the other as well. For example: if strArr is ["0000", "1000", "0002", "0002"] then this looks like
+
+// Challenge 6 - Eight Queens
+
+//     Read strArr which will be an array consisting of the locations of eight Queens on a standard 8x8 chess board with no other pieces on the board. The structure of strArr will be the following: ["(x,y)", "(x,y)", ...] where (x,y) represents the position of the current queen on the chessboard (x and y will both range from 1 to 8 where 1,1 is the bottom-left of the chessboard and 8,8 is the top-right). Your program should determine if all of the queens are placed in such a way where none of them are attacking each other. If this is true for the given input, return the string true otherwise return the first queen in the list that is attacking another piece in the same format it was provided.
