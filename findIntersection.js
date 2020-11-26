@@ -32,19 +32,10 @@ function FindIntersection(strArr) {
   
   }
      
-  // keep this function call here 
-  // console.log(FindIntersection(["1, 3, 4, 7, 13", "1, 2, 4, 13, 15"])) //Output: 1,4,13
-  // console.log(FindIntersection(["1, 3, 9, 10, 17, 18", "1, 4, 9, 10"])) //Output: 1,9,10
-  // console.log(FindIntersection(["1, 3, 9, 10, 17, 18", "2, 5, 8, 11"])) //Output: false
+  console.log(FindIntersection(["1, 3, 4, 7, 13", "1, 2, 4, 13, 15"])) //Output: 1,4,13
+  console.log(FindIntersection(["1, 3, 9, 10, 17, 18", "1, 4, 9, 10"])) //Output: 1,9,10
+  console.log(FindIntersection(["1, 3, 9, 10, 17, 18", "2, 5, 8, 11"])) //Output: false
   console.log(FindIntersection(["1, 3, -9, 10, 17, 18", "1, -4, -9, 10, 0"])) //Output: 1, -9, 10 beacause the array is not sorted, if the input was not sorted we can sort it by using the sort method 
 
 
 
-/* possible solutions 
-got to the comment section also  
-https://dev.to/coderbyte/a-common-coding-interview-question-461f
-
-https://dev.to/krtb/codetoday-find-intersection-algorithm-coderbyte-1mg5
-
-
-*/
