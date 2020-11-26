@@ -74,7 +74,7 @@ function ArrayChallenge(strArr) {
   }
      
   // keep this function call here 
-// console.log(ArrayChallenge(["0000", "2010", "0000", "2002"])); //Output: 2
-// console.log(ArrayChallenge(["000", "100", "200"])); //Output: 1
-// console.log(ArrayChallenge(["0000", "1000", "0002", "0002"])); //Output: 2
+console.log(ArrayChallenge(["0000", "2010", "0000", "2002"])); //Output: 2
+console.log(ArrayChallenge(["000", "100", "200"])); //Output: 1
+console.log(ArrayChallenge(["0000", "1000", "0002", "0002"])); //Output: 2
 console.log(ArrayChallenge(["0000", "1000", "0000", "0000"])); //Output: 0
