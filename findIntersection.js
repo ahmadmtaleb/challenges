@@ -14,17 +14,33 @@ For example: if the input array is ["1, 3, 4, 7, 13", "1, 2, 4, 13, 15"] the out
 */
 
 function FindIntersection(strArr) { 
+  let firstList = strArr[0].split(', ');
+  let secondList = strArr[1].split(', ');
+  // console.log('first list:', firstList);
+  // secondList.sort((a,b)=> a-b);
+  // console.log('second list:', secondList);
+  let intersectionList = [];
+  let returnStr = '';
+  secondList.forEach(number => {
+    if(firstList.includes(number)){
+      intersectionList.push(number);
+    }
+  });
+  returnStr = intersectionList.join();
 
-    // code goes here  
-    return strArr; 
+  return returnStr?returnStr:'false'; 
   
   }
      
   // keep this function call here 
-  let strArr = []
-  console.log(FindIntersection(strArr))
+  // console.log(FindIntersection(["1, 3, 4, 7, 13", "1, 2, 4, 13, 15"])) //Output: 1,4,13
+  // console.log(FindIntersection(["1, 3, 9, 10, 17, 18", "1, 4, 9, 10"])) //Output: 1,9,10
+  // console.log(FindIntersection(["1, 3, 9, 10, 17, 18", "2, 5, 8, 11"])) //Output: false
+  console.log(FindIntersection(["1, 3, -9, 10, 17, 18", "1, -4, -9, 10, 0"])) //Output: 1, -9, 10 beacause the array is not sorted, if the input was not sorted we can sort it by using the sort method 
 
-/* solutions 
+
+
+/* possible solutions 
 got to the comment section also  
 https://dev.to/coderbyte/a-common-coding-interview-question-461f
 
