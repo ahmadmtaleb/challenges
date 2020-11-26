@@ -43,7 +43,7 @@ is the **backslash character (\)**
 - s.substring(1,4) => 
 - s.slice(1,4) => 
 - s.slice(-3) => last 3 characters
-- s.split(", ) => split string at delimeter string 
+- s.split(", ") => split string at delimeter string 
 
 **Searching a string**
 - s.indexOf("l") 
