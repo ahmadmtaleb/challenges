@@ -129,3 +129,30 @@ def neighbors((x, y)):
 // Challenge 6 - Eight Queens
 
 //     Read strArr which will be an array consisting of the locations of eight Queens on a standard 8x8 chess board with no other pieces on the board. The structure of strArr will be the following: ["(x,y)", "(x,y)", ...] where (x,y) represents the position of the current queen on the chessboard (x and y will both range from 1 to 8 where 1,1 is the bottom-left of the chessboard and 8,8 is the top-right). Your program should determine if all of the queens are placed in such a way where none of them are attacking each other. If this is true for the given input, return the string true otherwise return the first queen in the list that is attacking another piece in the same format it was provided.
+
+
+// -------------------------------------------------------------------------------------
+// Object Manipulation 
+// Like Object.assign() but doesn't override existing properties
+// (and also doesn't handle Symbol properties)
+
+function merge(target, ...sources) {
+    for(let source of sources) {
+        for(let key of Object.keys(source)) {
+            if (!(key in target)) { // This is different than Object.assign()
+        target[key] = source[key];
+    }
+    }
+    }
+    return target;
+}
+
+// Object.assign({x: 1}, {x: 2, y: 2}, {y: 3, z: 4}) // => {x:2, y: 3, z: 4}
+// merge({x: 1}, {x: 2, y: 2}, {y: 3, z: 4})
+// => {x:1, y: 2, z: 4}
+
+/*It is straightforward to write other property manipulation utilities like this merge() function. A restrict() function could delete
+properties of an object if they do not appear in another template object,
+for example. Or a subtract() function could remove all of the
+properties of one object from another object.*/
+// -------------------------------------------------------------------------------------
