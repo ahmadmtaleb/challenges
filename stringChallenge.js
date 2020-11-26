@@ -12,11 +12,18 @@ Output: aBCDEFG
 -----------------------------------------
 */
 function StringChallenge(str) { 
+  let strg = str.replace(/[\W_]+/g," ");
+  let readyString = strg.toLowerCase();
+  let arrayOfWords = readyString.split(" ");
 
-    // code goes here  
-    return str; 
-  
+  for(let i = 1; i < arrayOfWords.length; i++){
+    arrayOfWords[i] = arrayOfWords[i].charAt(0).toUpperCase() + arrayOfWords[i].substring(1);     
+  }
+
+  return arrayOfWords.join('');
   }
      
   // keep this function call here 
-  // console.log(StringChallenge(readline()));
+console.log(StringChallenge("BOB loves-coding")); // Output: bobLovesCoding
+console.log(StringChallenge("cats AND*Dogs-are Awesome")); // Output: catsAndDogsAreAwesome
+console.log(StringChallenge("a b c d-e-f%g")); // Output: aBCDEFG
