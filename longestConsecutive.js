@@ -35,26 +35,3 @@ console.log(LongestConsecutive([100,4,200,1,3,2])) //Output: 4
 console.log(LongestConsecutive([0,3,7,2,5,8,4,6,0,1])) //Output: 9
 // console.log(LongestConsecutive([])) //Output: 
 // console.log(LongestConsecutive([])) //Output: 
-
-
-
-/*
- POSSIBLE SOLUTION in python
- def ArrayChallenge(arr):
-  l=[]
-  l2=[]
-  j=1
-  # code goes here
-  for i in range(len(arr)):
-    l=[i]
-    while arr[i]+j in arr:
-      l.append(arr[i]+j)
-      j=j+1
-    l2.append(len(l))
-  return max(l2)
-
-# keep this function call here 
-print(ArrayChallenge(input()))
-
- */
-
