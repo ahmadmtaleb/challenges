@@ -20,25 +20,7 @@ function NonrepeatingCharacter(str){
   result = Object.keys(countingObject).find(key => countingObject[key] === 1);
   return result;
 }
-console.log(NonrepeatingCharacter('a gettkgaeee'));
-console.log(NonrepeatingCharacter('agettkgaeee'));
-console.log(NonrepeatingCharacter('as;j;afdk.awefjslkijk.skwefmgettkgaeee'));
-console.log(NonrepeatingCharacter('jkdsfhluiuaehjbdhjkasgdfjhLADSJK.SG'));
-
-
-
-/*Solution 
-def SearchingChallenge(str1):
-  
-  for i in range(len(str1)):
-    if str1[i] not in str1[i+1:]: 
-      if str1[i] not in str1[0:i]:
-        if str1[i].isspace() == False:
-          var=str1[i]
-          break 
-  # code goes here
-  return var
-
-# keep this function call here 
-print(SearchingChallenge(input()))
-*/
+console.log(NonrepeatingCharacter('a gettkgaeee')); // Output: " "
+console.log(NonrepeatingCharacter('agettkgaeee')); // Output: k
+console.log(NonrepeatingCharacter('as;j;afdk.awefjslkijk.skwefmgettkgaeee')); // Output: d
+console.log(NonrepeatingCharacter('jkdsfhluiuaehjbdhjkasgdfjhLADSJK.SG')); // Output: i
