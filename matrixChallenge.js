@@ -152,5 +152,5 @@ function MatrixChallenge(strArr){
     }
     return 'true';
 }
-// console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'bog,bop,gup,fur,ruk']));
-// console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'rbfg,ukop,fgub,mnry']));
+console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'bog,bop,gup,fur,ruk'])); // Output: bog,bop,gup,ruk
+console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'rbfg,ukop,fgub,mnry'])); //Output: true
