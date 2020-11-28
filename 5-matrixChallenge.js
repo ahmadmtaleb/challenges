@@ -13,6 +13,7 @@
     u k o p
     f g u b 
     m n r y
+    
 
     The rules to make a word are as follows:
     1- A word can be constructed from sequentially adjacent spots in the matrix, where adjacent means moving horizontally, vertically, or diagonally in any direction 
@@ -23,134 +24,134 @@
 
 */
 function MatrixChallenge(strArr){
-    let returnStr = '';
 
-    let matrixArr = [];
-    let verticalCombination = [];
-    let horizontalCombination = [];
-    let diagonalCombination = []; 
-    let possibleWordsCombination = [];
-
-
-    //matrixWords is the array that holds all the strings not letters that form the matrixArr
+    let boggle = [];
     let matrixWords = strArr[0].split(', ');
-    
     matrixWords.forEach(value => {
-        matrixArr.push(value.split(''))
-    })
-    // the length of the matrix 
-    let lenMatrixArr = matrixArr.length;
-
-    for(let i = 0; i < lenMatrixArr; i++){ //for iterating over the lines 
-        for(let j = 0; j < lenMatrixArr; j++){ //for iterating over columns
-            let oneVerticalWord = '';
-            let oneHorizontalWord = '';
-            let oneDiagonalWord = '';
-            // for the whole horizontal words combination 
-            if(j < lenMatrixArr/2){
-                // horizontal words from left to right
-                for(let h = 0; h < lenMatrixArr; h++){ // for going back and forth on the same line 
-                    if(matrixArr[i][j+h]){
-                        oneHorizontalWord += matrixArr[i][j+h];
-                        if(oneHorizontalWord.length >= 3){
-                            horizontalCombination.push(oneHorizontalWord)
-                        }
-                        else continue;
-                    }
-                }
-            }
-            else {
-                // horizontal words from right to left 
-                for(let h = 0; h < lenMatrixArr; h++){ // for going back and forth on the same line 
-                    if(matrixArr[i][j-h]){
-                        oneHorizontalWord += matrixArr[i][j-h];
-                        if(oneHorizontalWord.length >= 3){
-                            horizontalCombination.push(oneHorizontalWord)
-                        }
-                        else continue;
-                    }
-                }
-            }
-            // for the whole vertical words combination 
-            if(i < lenMatrixArr/2){
-                for(let v = 0; v < lenMatrixArr; v++){ // for going back and forth on the same column 
-                    if(i+v >= 0 && i+v < lenMatrixArr){
-                        oneVerticalWord += matrixArr[i+v][j];
-                        if(oneVerticalWord.length >= 3){
-                            verticalCombination.push(oneVerticalWord)
-                        }
-                        else continue;
-                    }
-                }
-            }
-            else {
-                // horizontal words from right to left 
-                for(let v = 0; v < lenMatrixArr; v++){ // for going back and forth on the same line 
-                    if(i-v >= 0 && i-v < lenMatrixArr){
-                        oneVerticalWord += matrixArr[i-v][j];
-                        if(oneVerticalWord.length >= 3){
-                            verticalCombination.push(oneVerticalWord)
-                        }
-                        else continue;
-                    }
-                }
-            }
-            // for the diagonal words combination 
-            if(i < lenMatrixArr/2 && j < lenMatrixArr/2){
-                for(let v = 0; v < lenMatrixArr; v++){ // for going back and forth on the same column 
-                    if(i+v >= 0 && i+v < lenMatrixArr && j+v >= 0 && j+v < lenMatrixArr){
-                        oneDiagonalWord += matrixArr[i+v][j+v];
-                        if(oneDiagonalWord.length >= 3){
-                            diagonalCombination.push(oneDiagonalWord)
-                        }
-                        else continue;
-                    }
-                }
-            }
-            else {
-                // horizontal words from right to left 
-                for(let v = 0; v < lenMatrixArr; v++){ // for going back and forth on the same line 
-                    if(i-v >= 0 && j-v >= 0){
-                        oneDiagonalWord += matrixArr[i-v][j-v];
-                        if(oneDiagonalWord.length >= 3){
-                            diagonalCombination.push(oneDiagonalWord)
-                        }
-                        else continue;
-                    }
-                    else if(i+v > 0 && i+v < lenMatrixArr && j-v >= 0){
-                        oneDiagonalWord += matrixArr[i+v][j-v];
-                        if(oneDiagonalWord.length >= 3){
-                            diagonalCombination.push(oneDiagonalWord)
-                        }
-                        else continue;
-                    }
-                    else continue;
-                }
-            }
-            
-        }
-    }
-    possibleWordsCombination = [...verticalCombination, ...horizontalCombination, ...diagonalCombination];
-    // console.log(matrixWords)
-    // console.log('Horizontal Combination', horizontalCombination)
-    // console.log('Vertical Combination',  verticalCombination)
-    // console.log('Diagonal Combination', diagonalCombination)
-    // console.log('Possible combination', possibleWordsCombination.length)
-    // console.log('Possible combination', possibleWordsCombination)
-    // console.log(matrixArr)
-
-    let wordsArr = strArr[1].split(',');
-    let notMatchedArr = [];
-    wordsArr.forEach((value, index) => {
-        if(!possibleWordsCombination.includes(value)){
-            notMatchedArr.push(value)
-        }
+        boggle.push(value.split(''))
     });
-    returnStr = notMatchedArr.join();
-    if (returnStr){
-        return returnStr;
+    let row = boggle.length;
+    let col = boggle[0].length;
+
+    let wordToFind = strArr[1].split(',');
+
+    let Node = function() {
+        this.keys = new Map();
+        this.end = false;
+        this.setEnd = function() {
+            this.end = true;
+        };
+        this.isEnd = function() {
+            return this.end;
+        };
+    };
+    
+    let Trie = function() {
+    
+        this.root = new Node();
+    
+        this.add = function(input, node = this.root) {
+            if (input.length == 0) {
+                node.setEnd();
+                return;
+            } else if (!node.keys.has(input[0])) {
+                node.keys.set(input[0], new Node());
+                return this.add(input.substr(1), node.keys.get(input[0]));
+            } else {
+                return this.add(input.substr(1), node.keys.get(input[0]));
+            };
+        };
+    
+        this.isWord = function(word) {
+            let node = this.root;
+            while (word.length > 1) {
+                if (!node.keys.has(word[0])) {
+                    return false;
+                } else {
+                    node = node.keys.get(word[0]);
+                    word = word.substr(1);
+                };
+            };
+            return (node.keys.has(word) && node.keys.get(word).isEnd()) ? 
+          true : false;
+        };
+    };
+    function isSafe(i, j, visitedArray){
+        return (i >= 0 && i < row && j >= 0 && j < col && !visitedArray[i][j]); 
     }
-    return 'true';
+
+    let wordsFound = [];
+    let visitedArray = Array.from({ length: row }, () => Array.from({ length: col }, () => false));
+
+    function searchWord( myTrie, boggle, i, j, visitedArray, str){
+        if (myTrie.end == true){
+            wordsFound.push(str);
+        }
+        if (isSafe(i, j, visitedArray)) {
+            visitedArray[i][j] = true;
+            let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+            for (let k = 0; k < alphabet.length; k++) {
+                if(myTrie.keys.get(alphabet[k]) != undefined){
+                    let ch = alphabet[k];
+                    if (isSafe(i + 1, j + 1, visitedArray) && boggle[i + 1][j + 1] == ch){
+                        searchWord(myTrie.keys.get(alphabet[k]), boggle, i + 1, j + 1, visitedArray, str + ch);
+                    }
+                    if (isSafe(i, j + 1, visitedArray) && boggle[i][j + 1] == ch){
+                        searchWord(myTrie.keys.get(alphabet[k]), boggle, i, j + 1, visitedArray, str + ch); 
+                    }   
+                    if (isSafe(i - 1, j + 1, visitedArray) && boggle[i - 1][j + 1] == ch){
+                        searchWord(myTrie.keys.get(alphabet[k]), boggle, i - 1, j + 1, visitedArray, str + ch);
+                    }    
+                    if (isSafe(i + 1, j, visitedArray) && boggle[i + 1][j] == ch){
+                        searchWord(myTrie.keys.get(alphabet[k]), boggle, i + 1, j, visitedArray, str + ch); 
+                    } 
+                    if (isSafe(i + 1, j - 1, visitedArray) && boggle[i + 1][j - 1] == ch){
+                        searchWord(myTrie.keys.get(alphabet[k]), boggle, i + 1, j - 1, visitedArray, str + ch);
+                    }    
+                    if (isSafe(i, j - 1, visitedArray) && boggle[i][j - 1] == ch){
+                        searchWord(myTrie.keys.get(alphabet[k]), boggle, i, j - 1, visitedArray, str + ch); 
+                    }
+                    if (isSafe(i - 1, j - 1, visitedArray) && boggle[i - 1][j - 1] == ch){
+                        searchWord(myTrie.keys.get(alphabet[k]), boggle, i - 1, j - 1, visitedArray, str + ch);
+                    }
+                    if (isSafe(i - 1, j, visitedArray) && boggle[i - 1][j] == ch){
+                        searchWord(myTrie.keys.get(alphabet[k]), boggle, i - 1, j, visitedArray, str + ch);
+                    }
+                }
+            }
+            visitedArray[i][j] = false;
+        }
+    }
+    
+    let myTrie = new Trie();
+    for(let i = 0; i < wordToFind.length; i++){
+        myTrie.add(wordToFind[i]);
+    }
+
+    let str = '';
+    for(let i = 0; i < row; i++){
+        for(let j = 0; j < col; j++){
+            if (myTrie.root.keys.get(boggle[i][j]) != undefined ) { 
+                str += boggle[i][j]; 
+                searchWord(myTrie.root.keys.get(boggle[i][j]), boggle, i, j, visitedArray, str);
+                str = '';
+            }
+        }
+    }
+    let result = [];
+    wordToFind.forEach((element => {
+        if(!wordsFound.includes(element)){
+            result.push(element);
+        }
+    }));
+    let returnStr = result.join(',');
+    return returnStr?returnStr:'true'; 
+
 }
-console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'bog,bop,gup,fur,ruk'])); // Output: bog,bop,gup,ruk
-console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'rbfg,ukop,fgub,mnry'])); //Output: true
+
+console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'bog,bop,gup,fur,ruk'])); // Output: true
+console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'rbf,rbfg,bfg,fbr,gfb,gfbr,uko,ukop,kop,oku,pok,poku,fgu,fgub,gub,ugf,bug,bugf,mnr,mnry,nry,rnm,yrn,yrnm'])); // Output: true
+console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'ruf,rufm,bkg,bkgn,fou,four,gpb,gpby,ufm,kgn,our,pby,fur,gkb,uof,bpg,mfu,mfur,ngk,ngkb,ruo,ruof,ybp,ybpg'])); //Output: true
+console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'rku,rkuy,bob,gog,gogm,ugr,kuy,pun,mgo,mgog,nup,yuk,yukr'])); //Output: true
+console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'rkuyrnmg,gogmnrybpg'])); //Output: gogmnrybpg because the last character 'g' is already taken as the first character
+console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'adbs,rbfk,mgoc,ourd'])); //Output: adbs,mgoc,ourd
