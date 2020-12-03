@@ -155,3 +155,5 @@ console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'ruf,rufm,bkg,bkgn,fou,fo
 console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'rku,rkuy,bob,gog,gogm,ugr,kuy,pun,mgo,mgog,nup,yuk,yukr'])); //Output: true
 console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'rkuyrnmg,gogmnrybpg'])); //Output: gogmnrybpg because the last character 'g' is already taken as the first character
 console.log(MatrixChallenge(['rbfg, ukop, fgub, mnry', 'adbs,rbfk,mgoc,ourd'])); //Output: adbs,mgoc,ourd
+console.log(MatrixChallenge(["aaey, rrum, tgmn, ball", "all,ball,mur,raeymnl,tall,true,trum"])); // Output: true
+console.log(MatrixChallenge(["aaey, rrum, tgmn, ball", "all,ball,mur,raeymnl,rumk,tall,true,trum,yes"])); // Output: rumk,yes
